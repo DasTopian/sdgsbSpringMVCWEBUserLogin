@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration Page</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+$(function(){
+	$("#frm").submit(function(evt){
+		evt.preventDefault();
+		var obj={
+				name:$("#name").val(),
+				age:$("#age").val,
+				email:$("#email").val()
+		}
+		$.ajax({
+			url : '/register', //url we want to hit
+			method : 'POST', //GET or POST or any other method of HTTP
+			data :JSON.stringify(obj),//type of data we are sending
+			contentType:'application/json',
+			
+			success: function(response){
+				
+				alert(JSON.stringify(response));	
+			}
+			
+		})
+		
+	})
+})
+
+
+</script>
+</head>
+<body>
+<h1>Register here</h1>
+<form id="frm">
+	Enter name :<input id="name"/><br>
+	Enter age :<input id="age"/><br>
+	Enter email :<input id="email"/><br>
+	<button type="submit">Register</button>
+</form>
+<div id="regDetails"></div>
+</body>
+</html>

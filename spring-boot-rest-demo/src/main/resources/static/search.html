@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>PNR Number</title>
+<script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+$(function(){
+	$("#searchForm").submit(function(){
+		var email = $("#email").val();
+		var url = '/search?email='+email;
+		$.ajax({
+			url : url, //url we want to hit
+			method : 'GET', //GET or POST or any other method of HTTP
+			dataType : 'json', //What are we expecting back from the server
+			success: function(response){
+				//alert(JSON.stringify(response));	//Stringify: toString()
+				var p1 = $("<h3/>").text("ID: "+response.id);
+				var p2 = $("<h3/>").text("Name: "+response.name);
+				var p3 = $("<h3/>").text("Age: "+response.age);
+				var p4 = $("<h3/>").text("Email: "+response.email);
+				$("#details").html("<h1>Details of User: "+email+"</h1>")
+								.append(p1)
+								.append(p2)
+								.append(p3)
+								.append(p4);
+				
+			}
+		})
+		return false;
+		
+	})
+})
+</script>
+</head>
+<body>
+<h1>Check the status of your ticket here</h1>
+<form id="searchForm">
+	Enter Email:<input type="text" id="email"/>
+	<button type="submit">Check Status</button>
+</form>
+<div id="details"></div>
+</body>
+</html> 
